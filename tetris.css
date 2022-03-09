@@ -1,0 +1,101 @@
+.grid-container {
+  /* position:absolute; */
+  display: grid;
+  grid-template-columns: /*1em 1em 1em 1em 1em 1em 1em 1em 1em 1em;*/ 1.5em 1.5em 1.5em 1.5em 1.5em 1.5em 1.5em 1.5em 1.5em 1.5em;
+  background-color: #2196F3;
+  padding: 10px;
+}
+
+.grid-item {
+  height: 1.5em;
+  background-color: rgba(255, 255, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  /* padding: 20px;
+  font-size: 30px; */
+  text-align: center;
+}
+
+
+.tetromino {
+  background-color: red;
+  /* z-index: 2; */
+}
+
+.tetromino-preview {
+  /* position:absolute;
+  left: 20em; */
+  display: grid;
+  grid-template-columns: 1.5em 1.5em 1.5em 1.5em;
+  background-color:purple;
+  padding: 10px;
+  row-gap: 0px;
+  height: 6.5em;
+  padding-left: 7em;
+
+}
+
+.preview-item {
+  height: 1.5em;
+  background-color: rgba(199, 199, 255, 0.8);
+  border: 1px solid rgba(0, 0, 0, 0.8);
+  /* padding: 20px;
+  font-size: 30px; */
+  text-align: center;
+  /* z-index: -1; */
+}
+
+
+.container {
+  /* background-color: pink; */
+  display: flex;
+  flex-wrap: wrap;
+}
+
+
+
+#game-over{
+  display:inline-block;
+  color:pink;
+  position: relative;
+  bottom:8em;
+  text-shadow: 2px 6px #ff0000;
+
+  transform:rotate(-39deg);
+  font-size: 1.5em;
+
+}
+
+
+#score-style {
+  color:rgba(255, 255, 255, 0.8);
+  /* text-shadow: 1px -2px dodgerblue; */
+
+}
+
+#score {
+  color: purple;
+
+
+}
+
+#panel {
+  position: relative;
+  right: 13em;
+  z-index:2;
+}
+
+
+
+
+@keyframes color-change {
+from {color:black;}
+to {color:white;}
+}
+
+
+.animated-text{
+animation-name: color-change;
+animation-duration: 2s;
+/*animation-delay: 2s*/
+animation-iteration-count: infinite;
+}
