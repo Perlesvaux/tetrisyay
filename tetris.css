@@ -1,4 +1,4 @@
-.grid-container {
+  .grid-container {
   /* position:absolute; */
   display: grid;
   grid-template-columns: /*1em 1em 1em 1em 1em 1em 1em 1em 1em 1em;*/ 1.5em 1.5em 1.5em 1.5em 1.5em 1.5em 1.5em 1.5em 1.5em 1.5em;
@@ -26,11 +26,11 @@
   left: 20em; */
   display: grid;
   grid-template-columns: 1.5em 1.5em 1.5em 1.5em;
-  background-color:purple;
+  background-color:#6666ff;
   padding: 10px;
   row-gap: 0px;
   height: 6.5em;
-  padding-left: 7em;
+  padding-left: 3em;
 
 }
 
@@ -73,13 +73,15 @@
 }
 
 #score {
-  color: purple;
+  color: rgba(255, 255, 255, 0.8);
+
 
 
 }
 
 #panel {
-  position: relative;
+  /* position: relative; */
+  transform: translate(-8em, 8em);
   right: 13em;
   z-index:2;
 }
@@ -89,13 +91,30 @@
 
 @keyframes color-change {
 from {color:black;}
-to {color:white;}
+to {color:rgba(255, 255, 255, 0.8);}
 }
 
 
 .animated-text{
 animation-name: color-change;
-animation-duration: 2s;
+animation-duration: 0.5s;
 /*animation-delay: 2s*/
 animation-iteration-count: infinite;
+}
+
+
+@keyframes font-fade {
+from {opacity:1.0;}
+to {opacity: 0.0;}
+}
+
+.fading-font {
+  animation-name: font-fade;
+  animation-duration: 2.5s;
+
+}
+
+#scorePeek {
+  opacity: 0.0;
+  color: rgba(255, 255, 255, 0.8);
 }

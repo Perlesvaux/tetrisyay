@@ -2,7 +2,7 @@
 let pointer_grid = document.getElementById('grid');
 
 for (let j=1; j <=10; j++) {
-  pointer_grid.innerHTML += `<div class='grid-item'> x </div>` //original ceiling
+  pointer_grid.innerHTML += `<div class='grid-item'></div>` //original ceiling
 }
 
 for (let i = 1; i <= 200; i++) {
@@ -36,12 +36,20 @@ const TetrominoL = [
   [1, w+1, w*2, w*2+1],
   [w, w*2, w*2+1, w*2+2]
 ];
+// const TetrominoZ = [
+//   [0, w, w+1, w*2+1],
+//   [w+1, w+2, w*2 ,w*2+1],
+//   [0, w, w+1, w*2+1],
+//   [w+1, w+2, w*2, w*2+1]
+// ];
+
 const TetrominoZ = [
   [0, w, w+1, w*2+1],
   [w+1, w+2, w*2 ,w*2+1],
-  [0, w, w+1, w*2+1],
-  [w+1, w+2, w*2, w*2+1]
+  [2, w+1, w+2, w*2+1],
+  [w, w+1, w*2+1, w*2+2]
 ];
+
 const TetrominoT = [
   [1, w, w+1, w+2],
   [1, w+1, w+2, w*2+1],
@@ -123,7 +131,7 @@ function displayPreview(){
 
 
 moveDownTimer=500
-edgeCheckerTimer=9
+edgeCheckerTimer=5
 //make the tetromino move down at a regular interval in miliseconds
 //and check if an edge has been reached evry 10 miliseconds
 //timerId = setInterval(moveDown, moveDownTimer);
@@ -274,7 +282,8 @@ startButton.addEventListener('click', ()=>{
 })
 
 
-let ceilingAdder=  1
+let scoreMultiplier=  0 //
+let tempScore = 0 //
 
 function addScore(){
   for (let i=10; i<209; i+=w) {
@@ -283,10 +292,17 @@ function addScore(){
   //   const row = [i, i+1, i+2, i+3, i+4, i+5, i+6, i+7, i+8, i+9]
 
     if (row.every(index => squares[index].classList.contains('taken'))){
-      score += 10
+      //score += 10
       scoreDisplay.innerHTML = score
 
-      ceilingAdder++
+      document.querySelector('#score').classList.add('animated-text')
+      stopAnimation()
+
+      tempScore+=10
+      scoreMultiplier++
+
+      multiplyScore()
+
 
       row.forEach(index => {
         squares[index].classList.remove('taken')
@@ -298,13 +314,65 @@ function addScore(){
 
       const squaresRemoved = squares.splice(i,w)
       squares = squaresRemoved.concat(squares)
-      squares.forEach(cell => pointer_grid.appendChild(cell))
-      // for (let j=10;j<209;j++){
-      //   pointer_grid.appendChild(squares[j])
-      // }
+      squares.forEach(cell => pointer_grid.appendChild(cell)) //resarch more into this
 
+
+//debugger
     }
   }
+}
+
+scorePeek = document.getElementById('scorePeek')
+
+function multiplyScore (){
+
+console.log(tempScore*scoreMultiplier)
+scorePeek.innerHTML=`+${tempScore*scoreMultiplier}`
+scorePeek.classList.add('fading-font')
+
+
+  setTimeout(function(){
+    if (scoreMultiplier>0){
+
+      score += tempScore*scoreMultiplier
+    }
+
+      scoreMultiplier = 0
+      tempScore = 0
+
+
+      scoreDisplay.innerHTML = score
+    }
+  , 1500)
+
+
+  setTimeout(function(){
+
+    scorePeek.classList.remove('fading-font')
+
+
+  }, 2000)
+
+
+}
+
+
+
+let fontSizeInc = 1;
+function stopAnimation() {
+  setTimeout(function(){
+    document.querySelector('#score').classList.remove('animated-text')
+    console.log('works!')
+  },1000)
+
+//multiplyScore()
+//also, increase fontsize cuz... lol
+
+document.querySelector('#score').style.fontSize = `${fontSizeInc}em`
+fontSizeInc += 0.001
+
+
+
 }
 
 //let margin = Array.from(document.querySelectorAll('.ceiling'));
@@ -312,7 +380,7 @@ function addScore(){
 
 function newMargin(){
 squares.forEach(cell => cell.classList.remove('ceiling'))
-for (i=0;i<9;i++){
+for (i=0;i<10;i++){
   squares[i].classList.add('ceiling')
 
 
@@ -341,12 +409,11 @@ play = false;
 }
 
 
-// squares[0].innerHTML='assface'
 
-
-//
-//
-// let sq = Array.from(document.querySelectorAll('.preview-item'))
-//
-// for (let i in sq) console.log(`${i} 00`)
-// for (let q in sq) q.textContent = `test ${q}`
+//enhancement proposals:
+//add animation to #score everytime score is updated ✔
+//add a score multiplier per row simultaneously resolved ✔
+//modify animation duration ✔
+//add x2 more rotations to TetrominoZ ✔
+//show briefly new total ✔
+//increase fall time periodically
