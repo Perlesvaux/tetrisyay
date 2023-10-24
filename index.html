@@ -7,9 +7,11 @@
     <meta name="keywords" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="tetris.css">
+    <!-- <link rel="stylesheet" href="{{url_for('static', filename='css/tetris.css')}}"> -->
     <!--script type="text/javascript" src="tetris.js" charset="utf-8"></script-->
     <title>Basic Tetris</title>
     <script defer type="text/javascript" src="tetris.js" charset="utf-8"></script>
+    <!-- <script defer type="text/javascript" src="{{url_for('static', filename='js/tetris.js')}}" charset="utf-8"></script> -->
   </head>
   <body style="background-color: #666699">
     <header>
@@ -29,7 +31,9 @@
 
 
           <div id='panel'>
-          <h3><span id='score-style'>score:<span id='score' class='animated-text'></span></span></h3>
+          <h3><span id='score-style'>score:<span id='score'></span></span> <span id='scorePeek'></span></h3>
+          <!-- class='animated-text' -->
+
           <button id='start-button'>Start/Pause</button>
           </div>
 
